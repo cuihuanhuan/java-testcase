@@ -2,22 +2,21 @@ package com.company;
 
 import oracle.jdbc.pool.OracleDataSource;
 
-import java.sql.*;
-
 import java.io.FileInputStream;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DBUtil {
+public class DBUtilbk {
     public OracleDataSource ods;
     public Connection conn;
     public PreparedStatement pstmt;
     public Statement stmt;
     public ResultSet rset;
     public FileInputStream in;
-    public DBUtil(){
+    public DBUtilbk(){
         try {
             this.db();
         }catch (Exception e){
@@ -49,15 +48,13 @@ public class DBUtil {
         ResultSetMetaData md = rs.getMetaData();//获取键名
         int columnCount = md.getColumnCount();//获取行的数量
         while (rs.next()) {
-            //Map rowData = new HashMap();//声明Map
-            List ls = new ArrayList();
+            Map rowData = new HashMap();//声明Map
             for (int i = 1; i <= columnCount; i++) {
                 //rowData.put(md.getColumnName(i), rs.getObject(i));//获取键名及值
-                //rowData.put(md.getColumnName(i), rs.getString(i));
-                ls.add(rs.getString(i));
+                rowData.put(md.getColumnName(i), rs.getString(i));
 
             }
-            list.add(ls);
+            list.add(rowData);
         }
         return list;
     }

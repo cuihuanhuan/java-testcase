@@ -2,25 +2,21 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.List;
-public class Main {
 
+public class FileUtilTest {
     public static void main(String[] args) {
-        DBUtil dbUtil = new DBUtil();
 
         FileUtil fileUtil = new FileUtil();
         String path = "/Users/chh/Desktop/allcases_incre/80_00_0_2_43_tgt.sql";
         try {
             ArrayList list =  fileUtil.readFromTextFile(path);
-
-            for(int i=0;i<list.size();i++){
-                List ret = dbUtil.select(list.get(i).toString());
-                System.out.println(ret);
-            }
+            System.out.println(list);
         }catch (Exception e){
-            System.out.println(e);
+
         }
+
+
+
+        System.out.println("Hello World!");
     }
-
-
 }
-
