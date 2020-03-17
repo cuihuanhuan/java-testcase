@@ -1,23 +1,14 @@
 package com.company;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-public class Main {
+public class Mainbk {
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        HANAUtil hanaUtil = new HANAUtil();
-        hanaUtil.getConnection();
-        List ret = hanaUtil.getConnection();
-        System.out.println(ret);
+    public static void main(String[] args) {
+        SSHUtil ssh = new SSHUtil();
+        try {
+            ssh.connect();
+        }catch (Exception e){
 
-//        SSHUtil ssh = new SSHUtil();
-//        try {
-//            ssh.connect();
-//        }catch (Exception e){
-//
-//        }
+        }
 //        DBUtil dbUtil = new DBUtil();
 //
 //        FileUtil fileUtil = new FileUtil();
