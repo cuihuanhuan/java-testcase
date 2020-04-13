@@ -13,11 +13,11 @@ public class HANAUtil {
 
             Class.forName("com.sap.db.jdbc.Driver");
             String url ="jdbc:sap://192.168.100.20:39015?reconnect=true"; //IP Address of HANAsystem followed by Port number
-            String user ="SYSTEM";
+            String user ="HUAN3";
             String password = "Info2soft";
             Connection cn = java.sql.DriverManager.getConnection(url, user, password);
             //ResultSet rs = cn.createStatement().executeQuery("SELECT DATABASE_NAME FROM SYS.M_DATABASES");
-            ResultSet rs = cn.createStatement().executeQuery("select * from dds_rowid");
+            ResultSet rs = cn.createStatement().executeQuery("select * from dds_time");
             ResultSetMetaData md = rs.getMetaData();
             int columnCount = md.getColumnCount();//获取行的数量
             List list = new ArrayList();

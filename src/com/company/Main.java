@@ -1,5 +1,8 @@
 package com.company;
 
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+
+import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -7,11 +10,18 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        HANAUtil hanaUtil = new HANAUtil();
-        hanaUtil.getConnection();
-        List ret = hanaUtil.getConnection();
-        System.out.println(ret);
+        FileUtil util = new FileUtil();
+        ArrayList arr  = util.readDir("/Users/chh/Desktop/allcases_incre");
+        System.out.println(arr);
 
+//        HANAUtil hanaUtil = new HANAUtil();
+//        hanaUtil.getConnection();
+//        List ret = hanaUtil.getConnection();
+//        System.out.println(ret);
+//
+//        DBUtil dbUtil = new DBUtil();
+//        List oraret  = dbUtil.select("select * from dds_time");
+//        System.out.println(oraret);
 //        SSHUtil ssh = new SSHUtil();
 //        try {
 //            ssh.connect();
