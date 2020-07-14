@@ -1,13 +1,13 @@
 package com.company;
 
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class HANAUtil {
+public class HanaUtil {
 
     public List getConnection() throws ClassNotFoundException, SQLException {
 

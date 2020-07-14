@@ -6,9 +6,8 @@ import java.sql.*;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 public class DBUtil {
     public OracleDataSource ods;
@@ -17,31 +16,37 @@ public class DBUtil {
     public Statement stmt;
     public ResultSet rset;
     public FileInputStream in;
-    public DBUtil(){
-        try {
-            this.db();
-        }catch (Exception e){
-
-        }
-    }
-    public void db()  throws SQLException{
+//    public DBUtil(){
+//        try {
+//            this.db();
+//        }catch (Exception e){
+//
+//        }
+//    }
+    public void db(String url)  throws SQLException{
         ods = new OracleDataSource();
-        String url = "jdbc:oracle:thin:@//192.168.100.1:1521/orcl";
+        //String url = "jdbc:oracle:thin:@//192.168.90.1:1521/orclpdb";
         ods.setURL(url);
         ods.setUser("HUAN1");
-        ods.setPassword("abcde");
+        ods.setPassword("12345");
         conn = ods.getConnection();
         stmt = conn.createStatement();
     }
 
 
-    public List  select(String sql) throws SQLException{
-        rset = stmt.executeQuery (sql);
+
+
+    public List  select(String sql) {
         List list = new ArrayList();
-        list=convertList(rset);
-        return list;
+        try {
+            rset = stmt.executeQuery(sql);
+            list = convertList(rset);
 //        rset.close();
 //        stmt.close();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return list;
     }
 
     private static List convertList(ResultSet rs) throws SQLException {
@@ -54,7 +59,17 @@ public class DBUtil {
             for (int i = 1; i <= columnCount; i++) {
                 //rowData.put(md.getColumnName(i), rs.getObject(i));//获取键名及值
                 //rowData.put(md.getColumnName(i), rs.getString(i));
-                ls.add(rs.getString(i));
+                try{
+                    ls.add(rs.getString(i));
+                }catch (Exception e){
+                    try{
+                        ls.add(rs.getClob(i));
+                    }catch (Exception ee){
+                        ls.add(rs.getBlob(i));
+                    }
+
+                }
+
 
             }
             list.add(ls);

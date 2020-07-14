@@ -1,11 +1,11 @@
 package com.company;
 
 import java.io.*;
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 
 public class FileUtil {
-    public ArrayList<String> readFromTextFile(String pathname) throws IOException {
+    public static  ArrayList<String> readFromTextFile(String pathname) throws IOException {
         ArrayList<String> strArray = new ArrayList<String>();
         File filename = new File(pathname);
         InputStreamReader reader = new InputStreamReader(new FileInputStream(filename));
@@ -19,8 +19,15 @@ public class FileUtil {
                     if(!line.trim().startsWith("--"))
                         if (!line.trim().startsWith("/"))
                             if(!line.trim().equals(""))
-                                strArray.add(line);
-                                line = br.readLine();
+                                if(!line.trim().equals("rollback"))
+                                    if(line.indexOf("for update")!=-1) {
+                                        line.replace("for update", " ");
+                                        strArray.add(line.replace("for update", " "));
+                                    }else{
+                                        strArray.add(line);
+                                    }
+                                     line = br.readLine();
+
 
         }
         return strArray;
@@ -32,12 +39,22 @@ public class FileUtil {
         for(File f:fs){					//遍历File[]数组
             if(!f.isDirectory())		//若非目录(即文件)，则打印
                 //System.out.println(f);
-                arr.add(f);
+                if(f.toString().indexOf("src")!=-1){
+                    arr.add(f.toString().substring(30));
+                }
+
+                //arr.add(f);
         }
         return arr;
-
-
+    }
+    public static void delete(String path){
+        File file = new File(path);
+        if (file.exists()) {
+            file.delete();
+            //System.out.println("文件已经被成功删除");
+        }
 
     }
+
 }
 
